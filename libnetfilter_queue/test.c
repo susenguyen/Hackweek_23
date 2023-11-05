@@ -134,21 +134,21 @@ int main(int argc, char *argv[])
 	}
 
 	if ((nfq_q_hdl = nfq_create_queue(nfq_hdl, queue_num, cb, NULL)) == NULL)
-		handle_error("nfq_create_queue");
+		handle_error("nfq_create_queue()");
 
 	if (nfq_set_mode(nfq_q_hdl, NFQNL_COPY_PACKET, 0xffff) < 0)
-		handle_error("nfq_set_mode");
+		handle_error("nfq_set_mode()");
 
 	fd = nfq_fd(nfq_hdl);
 
 	while(1) {
 		if ((ret = recv(fd, (unsigned char *) recv_buf, BUF_SIZE, 0)) < 0) {
-			perror("recv");
+			perror("recv()");
 			continue;
 		}
 
 		if (nfq_handle_packet(nfq_hdl, (char *) recv_buf, ret) < 0)
-			handle_error("nfq_handle_packet");
+			handle_error("nfq_handle_packet()");
 	}
 
 	nfq_close(nfq_hdl);
