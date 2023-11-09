@@ -125,8 +125,10 @@ tcp_lat:
 - avg = 39.2
 - std dev = 0.77/1.95%
 
-- rcvbufsiz = 2^31 bytes (no ENOBUF during run)
-    - shows no improvement...
+```
+rcvbufsiz maxed out at 2^31 bytes (no ENOBUF during run)
+    => shows no improvement...
+```
 
 
 ## NF_HOOK - no str_str()
