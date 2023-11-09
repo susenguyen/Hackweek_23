@@ -3,9 +3,9 @@
 - Laptop unplugged => CPU throttled
 
 ## Nothing
-- qperf 10.1.0.2 -t 30 tcp_bw
-
 ```
+qperf 10.1.0.2 -t 30 tcp_bw
+
 tcp_bw:
     bw  =  2.59 GB/sec
     bw  =  2.66 GB/sec
@@ -17,8 +17,9 @@ tcp_bw:
 - avg = 2.62
 - std dev = 0.0346/1.32%
 
-- qperf 10.1.0.2 -t 30 tcp_lat
 ```
+qperf 10.1.0.2 -t 30 tcp_lat
+
 tcp_lat:
     latency  =  29.2 us
     latency  =  29.1 us
@@ -31,12 +32,12 @@ tcp_lat:
 - std dev = 1.74/6.17%
 
 ## libnetfilter_queue - no str_str()
-- qperf 10.1.0.2 -t 30 tcp_bw
 - Note: requires a little more code to pull the packet from the queue => not as stripped down
 - Strong variance <= user space => renice -20 -p PID
 
-- rcvbufsiz = 8192 bytes
 ```
+qperf 10.1.0.2 -t 30 tcp_bw
+(rcvbufsiz = 8192 bytes)
 tcp_bw:
     bw  =  227 MB/sec   (renice)    203 MB/sec
     bw  =  176 MB/sec               222 MB/sec
@@ -48,10 +49,11 @@ tcp_bw:
 - avg = 166
 - std dev = 35.7/21.5%
 
-- qperf 10.1.0.2 -t 30 tcp_lat
-- renice -20 -p PID
-
 ```
+qperf 10.1.0.2 -t 30 tcp_lat
+renice -20 -p PID
+(rcvbufsiz = 8192 bytes)
+
 tcp_lat:
     latency  =  37 us
     latency  =  41.2 us
@@ -64,10 +66,11 @@ tcp_lat:
 - std dev = 1.60/4.04%
 
 ## libnetfilter_queue - with str_str()
-- qperf 10.1.0.2 -t 30 tcp_bw
 
-- rcvbufsiz = 8192 bytes
 ```
+qperf 10.1.0.2 -t 30 tcp_bw
+(rcvbufsiz = 8192 bytes)
+
 tcp_bw:
     bw  =  112 MB/sec
     bw  =  127 MB/sec
@@ -79,9 +82,10 @@ tcp_bw:
 - avg = 116.8
 - std dev = 5.56/4.76%
 
-- qperf 10.1.0.2 -t 30 tcp_lat
-
 ```
+qperf 10.1.0.2 -t 30 tcp_lat
+(rcvbufsiz = 8192 bytes)
+
 tcp_lat:
     latency  =  47.4 us
     latency  =  45 us
@@ -93,8 +97,9 @@ tcp_lat:
 - avg = 44.7
 - std dev = 1.95/4.36%
 
-- rcvbufsiz = 1638400 bytes
 ```
+(rcvbufsiz = 1638400 bytes)
+
 tcp_bw:
     bw  =  313 MB/sec
     bw  =  314 MB/sec
@@ -107,6 +112,8 @@ tcp_bw:
 - std dev = 23.89/8.09%
 
 ```
+(rcvbufsiz = 1638400 bytes)
+
 tcp_lat:
     latency  =  38.5 us
     latency  =  38.6 us
@@ -123,8 +130,9 @@ tcp_lat:
 
 
 ## NF_HOOK - no str_str()
-- qperf 10.1.0.2 -t 30 tcp_bw
 ```
+qperf 10.1.0.2 -t 30 tcp_bw
+
 tcp_bw:
     bw  =  2.65 GB/sec
     bw  =  2.61 GB/sec
@@ -136,8 +144,9 @@ tcp_bw:
 - avg = 2.65
 - std dev = 0.022/0.84%
 
-- qperf 10.1.0.2 -t 30 tcp_lat
 ```
+qperf 10.1.0.2 -t 30 tcp_lat
+
 tcp_lat:
     latency  =  28.7 us
     latency  =  30.1 us
@@ -150,8 +159,9 @@ tcp_lat:
 - std dev = 0.934/3.28%
 
 ## NF_HOOK - with str_str()
-- qperf 10.1.0.2 -t 30 tcp_bw
 ```
+qperf 10.1.0.2 -t 30 tcp_bw
+
 tcp_bw:
     bw  =  1.24 GB/sec
     bw  =  1.25 GB/sec
@@ -163,8 +173,9 @@ tcp_bw:
 - avg = 1.24
 - std dev = 0.01/0.8%
 
-- qperf 10.1.0.2 -t 30 tcp_lat
 ```
+qperf 10.1.0.2 -t 30 tcp_lat
+
 tcp_lat:
     latency  =  27.3 us
     latency  =  27.9 us
@@ -177,8 +188,9 @@ tcp_lat:
 - std dev = 0.35/1.27%
 
 ## eBPF XDP - no str_str()
-- qperf 10.1.0.2 -t 30 tcp_bw
 ```
+qperf 10.1.0.2 -t 30 tcp_bw
+
 tcp_bw:
     bw  =  298 MB/sec
     bw  =  302 MB/sec
@@ -190,8 +202,9 @@ tcp_bw:
 - avg = 306.4
 - std dev = 6.09/1.98%
 
-- qperf 10.1.0.2 -t 30 tcp_lat
 ```
+qperf 10.1.0.2 -t 30 tcp_lat
+
 tcp_lat:
     latency  =  30.7 us
     latency  =  28.3 us
@@ -204,8 +217,9 @@ tcp_lat:
 - std dev = 0.99/3.34%
 
 ## eBPF XDP - with str_str()
-- qperf 10.1.0.2 -t 30 tcp_bw
 ```
+qperf 10.1.0.2 -t 30 tcp_bw
+
 tcp_bw:
     bw  =  291 MB/sec
     bw  =  289 MB/sec
@@ -217,8 +231,9 @@ tcp_bw:
 - avg = 290.8
 - std dev = 1.72/0.59%
 
-- qperf 10.1.0.2 -t 30 tcp_lat
 ```
+qperf 10.1.0.2 -t 30 tcp_lat
+
 tcp_lat:
     latency  =  29.5 us
     latency  =  28.7 us
