@@ -14,6 +14,9 @@ tcp_bw:
     bw  =  2.57 GB/sec
 ```
 
+- avg = 2.62
+- std dev = 0.0346/1.32%
+
 - qperf 10.1.0.2 -t 30 tcp_lat
 ```
 tcp_lat:
@@ -23,6 +26,9 @@ tcp_lat:
     latency  =  28.6 us
     latency  =  24.8 us
 ```
+
+- avg = 28.2
+- std dev = 1.74/6.17%
 
 ## libnetfilter_queue - no str_str()
 - qperf 10.1.0.2 -t 30 tcp_bw
@@ -39,6 +45,9 @@ tcp_bw:
     bw  =  138 MB/sec               223 MB/sec
 ```
 
+- avg = 166
+- std dev = 35.7/21.5%
+
 - qperf 10.1.0.2 -t 30 tcp_lat
 - renice -20 -p PID
 
@@ -50,6 +59,9 @@ tcp_lat:
     latency  =  41.3 us
     latency  =  39.2 us
 ```
+
+- avg = 39.6
+- std dev = 1.60/4.04%
 
 ## libnetfilter_queue - with str_str()
 - qperf 10.1.0.2 -t 30 tcp_bw
@@ -64,6 +76,9 @@ tcp_bw:
     bw  =  118 MB/sec
 ```
 
+- avg = 116.8
+- std dev = 5.56/4.76%
+
 - qperf 10.1.0.2 -t 30 tcp_lat
 
 ```
@@ -75,6 +90,9 @@ tcp_lat:
     latency  =  42.8 us
 ```
 
+- avg = 44.7
+- std dev = 1.95/4.36%
+
 - rcvbufsiz = 1638400 bytes
 ```
 tcp_bw:
@@ -85,6 +103,9 @@ tcp_bw:
     bw  =  267 MB/sec
 ```
 
+- avg = 295.2
+- std dev = 23.89/8.09%
+
 ```
 tcp_lat:
     latency  =  38.5 us
@@ -93,6 +114,9 @@ tcp_lat:
     latency  =  39.4 us
     latency  =  38.9 us
 ```
+
+- avg = 39.2
+- std dev = 0.77/1.95%
 
 - rcvbufsiz = 2^31 bytes (no ENOBUF during run)
     - shows no improvement...
@@ -109,6 +133,9 @@ tcp_bw:
     bw  =  2.68 GB/sec
 ```
 
+- avg = 2.65
+- std dev = 0.022/0.84%
+
 - qperf 10.1.0.2 -t 30 tcp_lat
 ```
 tcp_lat:
@@ -118,6 +145,9 @@ tcp_lat:
     latency  =  27.9 us
     latency  =  27.7 us
 ```
+
+- avg = 28.4
+- std dev = 0.934/3.28%
 
 ## NF_HOOK - with str_str()
 - qperf 10.1.0.2 -t 30 tcp_bw
@@ -130,6 +160,9 @@ tcp_bw:
     bw  =  1.24 GB/sec
 ```
 
+- avg = 1.24
+- std dev = 0.01/0.8%
+
 - qperf 10.1.0.2 -t 30 tcp_lat
 ```
 tcp_lat:
@@ -139,6 +172,9 @@ tcp_lat:
     latency  =  27.0 us
     latency  =  27.4 us
 ```
+
+- avg = 27.4
+- std dev = 0.35/1.27%
 
 ## eBPF XDP - no str_str()
 - qperf 10.1.0.2 -t 30 tcp_bw
