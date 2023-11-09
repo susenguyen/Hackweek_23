@@ -187,6 +187,9 @@ tcp_bw:
     bw  =  311 MB/sec
 ```
 
+- avg = 306.4
+- std dev = 6.09/1.98%
+
 - qperf 10.1.0.2 -t 30 tcp_lat
 ```
 tcp_lat:
@@ -196,6 +199,9 @@ tcp_lat:
     latency  =  29.3 us
     latency  =  29.1 us
 ```
+
+- avg = 29.7
+- std dev = 0.99/3.34%
 
 ## eBPF XDP - with str_str()
 - qperf 10.1.0.2 -t 30 tcp_bw
@@ -208,6 +214,9 @@ tcp_bw:
     bw  =  290 MB/sec
 ```
 
+- avg = 290.8
+- std dev = 1.72/0.59%
+
 - qperf 10.1.0.2 -t 30 tcp_lat
 ```
 tcp_lat:
@@ -217,3 +226,6 @@ tcp_lat:
     latency  =  28.5 us
     latency  =  28.2 us
 ```
+
+- avg = 28.4
+- std dev = 0.81/2.86%
