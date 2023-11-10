@@ -13,3 +13,8 @@ Build 3 simple programs with the same filtering function and compare their perfo
 - Throughput
 - Response times
 
+## Benchmarks
+
+- qperf for throughput and latency
+- scp to test a more "usual" workload for throughput
+
