@@ -1,33 +1,29 @@
 # Throughput & Latency Tests with qperf
 
-- Laptop unplugged => CPU throttled
+- Laptop power plugged => more deterministic!
 
 ## Nothing
 ```
 qperf 10.1.0.2 -t 30 tcp_bw
 
 tcp_bw:
-    bw  =  2.59 GB/sec
-    bw  =  2.66 GB/sec
-    bw  =  2.63 GB/sec
-    bw  =  2.65 GB/sec
-    bw  =  2.57 GB/sec
+    bw  =  3.92 GB/sec
+    bw  =  3.69 GB/sec
+    bw  =  3.58 GB/sec
+    bw  =  3.62 GB/sec
+    bw  =  3.52 GB/sec
 ```
-- avg = 2.62
-- std dev = 0.0346/1.32%
 
 ```
 qperf 10.1.0.2 -t 30 tcp_lat
 
 tcp_lat:
-    latency  =  29.2 us
-    latency  =  29.1 us
-    latency  =  29.5 us
-    latency  =  28.6 us
-    latency  =  24.8 us
+    latency  =  18.2 us
+    latency  =  18.3 us
+    latency  =  18.7 us
+    latency  =  21.6 us
+    latency  =  18.5 us
 ```
-- avg = 28.2
-- std dev = 1.74/6.17%
 
 ## libnetfilter_queue - no str_str()
 - Note: requires a little more code to pull the packet from the queue => not as stripped down
@@ -37,14 +33,12 @@ tcp_lat:
 qperf 10.1.0.2 -t 30 tcp_bw
 (rcvbufsiz = 8192 bytes)
 tcp_bw:
-    bw  =  227 MB/sec   (renice)    203 MB/sec
-    bw  =  176 MB/sec               222 MB/sec
-    bw  =  124 MB/sec               283 MB/sec
-    bw  =  165 MB/sec               184 MB/sec
-    bw  =  138 MB/sec               223 MB/sec
+    bw  =  423 MB/sec
+    bw  =  406 MB/sec
+    bw  =  412 MB/sec
+    bw  =  437 MB/sec
+    bw  =  533 MB/sec
 ```
-- avg = 166
-- std dev = 35.7/21.5%
 
 ```
 qperf 10.1.0.2 -t 30 tcp_bw
@@ -52,14 +46,12 @@ renice -20 -p [test pid]
 (rcvbufsiz = 1638400 bytes)
 
 tcp_bw:
-    bw  =  430 MB/sec
-    bw  =  502 MB/sec
-    bw  =  423 MB/sec
-    bw  =  456 MB/sec
-    bw  =  466 MB/sec
+    bw  =  602 MB/sec
+    bw  =  572 MB/sec
+    bw  =  539 MB/sec
+    bw  =  523 MB/sec
+    bw  =  543 MB/sec
 ```
-- avg = 455.4
-- std dev = 28.2/3.54%
 
 ```
 qperf 10.1.0.2 -t 30 tcp_lat
@@ -67,61 +59,27 @@ renice -20 -p [test pid]
 (rcvbufsiz = 1638400 bytes)
 
 tcp_lat:
-    latency  =  39 us
-    latency  =  36.7 us
-    latency  =  37.3 us
-    latency  =  37.2 us
-    latency  =  34.4 us
+    latency  =  33.5 us
+    latency  =  30 us
+    latency  =  32.8 us
+    latency  =  33 us
+    latency  =  34.6 us
 ```
-- avg = 36.9
-- std dev = 1.48/4.0%
 
 ## libnetfilter_queue - with str_str()
 
 ```
 qperf 10.1.0.2 -t 30 tcp_bw
 renice -20 -p [test pid]
-(rcvbufsiz = 8192 bytes)
-
-tcp_bw:
-    bw  =  112 MB/sec
-    bw  =  127 MB/sec
-    bw  =  115 MB/sec
-    bw  =  112 MB/sec
-    bw  =  118 MB/sec
-```
-- avg = 116.8
-- std dev = 5.56/4.76%
-
-```
-qperf 10.1.0.2 -t 30 tcp_lat
-renice -20 -p [test pid]
-(rcvbufsiz = 8192 bytes)
-
-tcp_lat:
-    latency  =  47.4 us
-    latency  =  45 us
-    latency  =  42.6 us
-    latency  =  45.6 us
-    latency  =  42.8 us
-```
-- avg = 44.7
-- std dev = 1.95/4.36%
-
-```
-qperf 10.1.0.2 -t 30 tcp_bw
-renice -20 -p [test pid]
 (rcvbufsiz = 1638400 bytes)
 
 tcp_bw:
-    bw  =  313 MB/sec
-    bw  =  314 MB/sec
-    bw  =  317 MB/sec
-    bw  =  265 MB/sec
-    bw  =  267 MB/sec
+    bw  =  415 MB/sec
+    bw  =  393 MB/sec
+    bw  =  374 MB/sec
+    bw  =  428 MB/sec
+    bw  =  373 MB/sec
 ```
-- avg = 295.2
-- std dev = 23.89/8.09%
 
 ```
 qperf 10.1.0.2 -t 30 tcp_lat
@@ -129,14 +87,12 @@ renice -20 -p [test pid]
 (rcvbufsiz = 1638400 bytes)
 
 tcp_lat:
-    latency  =  38.5 us
-    latency  =  38.6 us
-    latency  =  40.6 us
-    latency  =  39.4 us
-    latency  =  38.9 us
+    latency  =  31.6 us
+    latency  =  32.8 us
+    latency  =  32.2 us
+    latency  =  32.8 us
+    latency  =  33.9 us
 ```
-- avg = 39.2
-- std dev = 0.77/1.95%
 
 ```
 rcvbufsiz maxed out at 2^31 bytes (no ENOBUF during run)
@@ -149,105 +105,89 @@ rcvbufsiz maxed out at 2^31 bytes (no ENOBUF during run)
 qperf 10.1.0.2 -t 30 tcp_bw
 
 tcp_bw:
-    bw  =  2.65 GB/sec
-    bw  =  2.61 GB/sec
-    bw  =  2.66 GB/sec
-    bw  =  2.66 GB/sec
-    bw  =  2.68 GB/sec
+    bw  =  3.68 GB/sec
+    bw  =  3.64 GB/sec
+    bw  =  3.71 GB/sec
+    bw  =  3.5 GB/sec
+    bw  =  3.53 GB/sec
 ```
-- avg = 2.65
-- std dev = 0.022/0.84%
 
 ```
 qperf 10.1.0.2 -t 30 tcp_lat
 
 tcp_lat:
-    latency  =  28.7 us
-    latency  =  30.1 us
-    latency  =  27.6 us
-    latency  =  27.9 us
-    latency  =  27.7 us
+    latency  =  22.6 us
+    latency  =  20.5 us
+    latency  =  21.9 us
+    latency  =  20.2 us
+    latency  =  21.5 us
 ```
-- avg = 28.4
-- std dev = 0.934/3.28%
 
 ## NF_HOOK - with str_str()
 ```
 qperf 10.1.0.2 -t 30 tcp_bw
 
 tcp_bw:
-    bw  =  1.24 GB/sec
-    bw  =  1.25 GB/sec
-    bw  =  1.27 GB/sec
-    bw  =  1.26 GB/sec
-    bw  =  1.24 GB/sec
+    bw  =  1.81 GB/sec
+    bw  =  1.75 GB/sec
+    bw  =  1.84 GB/sec
+    bw  =  1.74 GB/sec
+    bw  =  1.81 GB/sec
 ```
-- avg = 1.24
-- std dev = 0.01/0.8%
 
 ```
 qperf 10.1.0.2 -t 30 tcp_lat
 
 tcp_lat:
-    latency  =  27.3 us
-    latency  =  27.9 us
-    latency  =  27.2 us
-    latency  =  27.0 us
-    latency  =  27.4 us
+    latency  =  17.9 us
+    latency  =  22.7 us
+    latency  =  17.7 us
+    latency  =  19.8 us
+    latency  =  19.3 us
 ```
-- avg = 27.4
-- std dev = 0.35/1.27%
 
 ## eBPF XDP - no str_str()
 ```
 qperf 10.1.0.2 -t 30 tcp_bw
 
 tcp_bw:
-    bw  =  298 MB/sec
-    bw  =  302 MB/sec
-    bw  =  306 MB/sec
-    bw  =  315 MB/sec
-    bw  =  311 MB/sec
+    bw  =  399 MB/sec
+    bw  =  392 MB/sec
+    bw  =  397 MB/sec
+    bw  =  381 MB/sec
+    bw  =  380 MB/sec
 ```
-- avg = 306.4
-- std dev = 6.09/1.98%
 
 ```
 qperf 10.1.0.2 -t 30 tcp_lat
 
 tcp_lat:
-    latency  =  30.7 us
-    latency  =  28.3 us
-    latency  =  30.9 us
-    latency  =  29.3 us
-    latency  =  29.1 us
+    latency  =  20.8 us
+    latency  =  21.1 us
+    latency  =  22.2 us
+    latency  =  23.6 us
+    latency  =  21.2 us
 ```
-- avg = 29.7
-- std dev = 0.99/3.34%
 
 ## eBPF XDP - with str_str()
 ```
 qperf 10.1.0.2 -t 30 tcp_bw
 
 tcp_bw:
-    bw  =  291 MB/sec
-    bw  =  289 MB/sec
-    bw  =  290 MB/sec
-    bw  =  294 MB/sec
-    bw  =  290 MB/sec
+    bw  =  487 MB/sec
+    bw  =  451 MB/se
+    bw  =  472 MB/sec
+    bw  =  464 MB/sec
+    bw  =  465 MB/sec
 ```
-- avg = 290.8
-- std dev = 1.72/0.59%
 
 ```
 qperf 10.1.0.2 -t 30 tcp_lat
 
 tcp_lat:
-    latency  =  29.5 us
-    latency  =  28.7 us
-    latency  =  27 us
-    latency  =  28.5 us
-    latency  =  28.2 us
+    latency  =  22.2 us
+    latency  =  22.6 us
+    latency  =  19.4 us
+    latency  =  19.9 us
+    latency  =  21.6 us
 ```
-- avg = 28.4
-- std dev = 0.81/2.86%
