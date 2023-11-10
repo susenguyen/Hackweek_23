@@ -3,7 +3,6 @@
 
 #include <linux/netfilter.h>
 #include <linux/ip.h>
-#include <linux/tcp.h>
 
 #define NEEDLE "STEPH"
 #define NEEDLE_LEN 5
